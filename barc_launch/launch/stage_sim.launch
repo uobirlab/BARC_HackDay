@@ -1,0 +1,36 @@
+<launch>
+
+<!-- tell to roscore that we will run in simulation-->
+<master auto="start"/>
+<param name="/use_sim_time" value="true"/>
+
+
+<!-- start stage simulator -->
+<node pkg="stage_ros" type="stageros" name="stageros" args="$(find barc_launch)/world/stage_pioneer.world" >
+<remap from="/base_scan" to="/scan" />
+</node>
+
+<!-- joy node for aka joystick drivers-->
+  <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
+    <param name="dev" type="string" value="/dev/input/js0" /> <!-- change this /jsX depending on your joystick port -->
+    <param name="deadzone" value="0.15" />
+    <param name="autorepeat_rate" type="double" value="10.0" />
+  </node>
+
+<!-- teleop node -->
+<node pkg="barc_teleop" type="barc_teleop_node" respawn="false" name="barc_teleop" output="screen"/>
+
+<!-- cmd mixer for e.g. emergency stop if nav doesnt work good. (buttons for teleoperation - stop - autonomy mode) -->
+<!-- In xbox controller Y =  teleop , A = auto , B = stop (in any case) -->
+<node pkg="barc_safe_cmd" type="barc_safe_cmd" respawn="false" name="barc_safe_cmd" output="screen"/>
+
+
+   <!-- Gmapping SLAM -->
+  <include file="$(find barc_launch)/launch/slam_gmapping.launch"/>
+
+
+
+<!-- Navigation stuff / move_base -->
+<include file="$(find barc_launch)/launch/move_base.launch"/>
+
+</launch>

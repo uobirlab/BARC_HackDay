@@ -1,0 +1,54 @@
+<launch>
+
+<!-- NAavigation and SLAM for use with the real pioneer -->
+
+  
+  <!-- RosAria pioneer drivers -->
+<node pkg="rosaria" type="RosAria" name="RosAria" >
+  <param name="port" type="string" value="/dev/ttyUSB0" />
+  <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
+  <remap from="/RosAria/pose" to="odom" />
+  </node>
+
+
+<!-- joy node -->
+  <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.15" />
+    <param name="autorepeat_rate" type="double" value="10.0" />
+  </node>
+
+
+<!-- teleop node -->
+<node pkg="barc_teleop" type="barc_teleop_node" respawn="false" name="barc_teleop" output="screen"/>
+
+
+<!-- cmd mixer for e.g. emergency stop if nav doesnt work good. (buttons for teleoperation - stop - autonomy mode) -->
+<!-- In xbox controller Y =  teleop , A = auto , B = stop (in any case) -->
+<node pkg="barc_safe_cmd" type="barc_safe_cmd" respawn="false" name="barc_safe_cmd" output="screen"/>
+
+
+
+  <!-- tf transform -->
+  <!-- approximative measures -->
+  <!-- args ="x y z qx qy qz frame_id child_frame_id period_in_ms" -->
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.224 0 0.125 0 0 0 base_link base_laser 50" />
+
+  
+  <!-- hokuyo laser scaner drivers -->
+  <node name="hokuyo" pkg="hokuyo_node" type="hokuyo_node" respawn="false" output="screen">
+    <param name="frame_id" type="string" value="base_laser"/>
+    <param name="calibrate_time" type="bool" value="true"/> <!-- Starts up slow, but accurate timestamps  --> 
+    <param name="port" type="string" value="/dev/ttyACM0"/> <!-- Set the port to connect to here -->
+    <param name="intensity" type="bool" value="false"/>
+  </node>
+
+
+  <!-- Gmapping SLAM -->
+  <include file="$(find barc_launch)/launch/slam_gmapping.launch"/>
+
+<!-- Navigation stuff / move_base -->
+<include file="$(find barc_launch)/launch/move_base.launch"/>
+
+
+</launch>

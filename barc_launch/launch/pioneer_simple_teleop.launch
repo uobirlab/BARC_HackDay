@@ -1,0 +1,27 @@
+<launch>
+
+ <!-- RosAria pioneer drivers -->
+<node pkg="rosaria" type="RosAria" name="RosAria" >
+  <param name="port" type="string" value="/dev/ttyUSB0" />
+  <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
+  <remap from="/RosAria/pose" to="odom" />
+  </node>
+
+
+<!-- joy node -->
+  <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.15" />
+    <param name="autorepeat_rate" type="double" value="10.0" />
+  </node>
+
+
+<!-- teleop node -->
+<node pkg="barc_teleop" type="barc_teleop_node" respawn="false" name="barc_teleop" output="screen">
+ <remap from="/teleop/cmd_vel" to="/cmd_vel" />
+</node>
+
+
+ 
+
+</launch>
