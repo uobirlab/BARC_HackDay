@@ -65,33 +65,41 @@ d. If you are using C++ to code, you need to compile your work by command ``catk
 
 e. To test your node, first start roscore by command ``roscore``.
 
-f. In a new terminal, run Stage simulator by comand ``roslaunch ``. A window with simulation should open. g. In another terminal, run your code by ``rosrun wanderer wanderer_publisher``. You should see that the robot in simulation starts to move and its behaviour corresponds to the command what you gave to it. h. If you can control a robot, it is time to procede to next step.
+f. In a new terminal, run Stage simulator by comand ``roslaunch barc_launch stage_sim.launch``. A window with simulation should open. You can see a map of lower ground of CS building with pioneer robot placed in this word.
+
+g. In a new terminal, run your code by ``rosrun wanderer wanderer_publisher``. You should see that the robot in simulation starts to move and its behaviour corresponds to the command what you gave to it. 
+
+h. If you can control a robot, it is time to procede to next step.
 
  ***Laser scanner listener:***
 
 a. Create a new node "wanderer_listener" inside package "wanderer". 
 
-b. Laser scanner provides messages of type ``TODO`` on the topic ``TODO``, so write a listener node for this topic. For testing purposes, only print some information by ``ROSINFO()`` when you receive a message.
+b. Laser scanner provides messages of type ``sensor_msgs/LaserScan`` (http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html) on the topic ``scan`` (http://wiki.ros.org/hokuyo_node#Published_Topics), so write a listener node for this topic. For testing purposes, only print some information by ``ROSINFO()`` (behaving same as printf) when you receive a message.
 
-c. If you are using C++ to code, you need to compile your work by command ``catkin_make`` in your catkin workspace (not in package). 
+c. If you are using C++ to code, you need to compile your work by command ``catkin_make`` in your catkin workspace (not inside the package). 
 
 d. To test your node, first start roscore by command ``roscore``.
 
-e. In another terminal, run Player/Stage simulator by comand ``TODO``. A window with simulation should open. 
+e. In another terminal, run Stage simulator by command ``roslaunch barc_launch stage_sim.launch``. A window with simulation should open. 
 
 f. In another terminal, run your code by ``rosrun wanderer wanderer_listener``. If everything is working, you should see messages created by your node in terminal. Notice, that the robot is not moving as we didnt run any control node.
 
-g. If this part is working, you can procede to merging both steps.
+g. You can also run both nodes (wanderer_pubsliher and wanderer_listener). As the robot will move in Stage simulator, laser scanner data will be simulated and you can observe this within your listener node. 
+
+h. If this part is working, you can procede to merging both steps.
 
 ***Robot wanderer:***
 
-The idea of a node is to navigate robot in a corridor using laser scan measurements. Thus, you need to read laser scans and add some logic to detect, if there is more space on the left or on the right. Based on this information, robot should turn in that way that it will be still in the middle of corridor. Notice, you should always detect if a space in front of a robot is free.
+The idea of a node is to navigate robot in a corridor using laser scan measurements. Thus, you need to read laser scans and add some logic to detect, if there is more space on the left or on the right. Based on this information, robot should turn to ensure that it will be still in the middle of corridor. Later, you can add detection if a space in front of a robot is free.
 
 a. In this step, you should combine both packages to one. Thus create a new node "wanderer_node", when you will connect both previous nodes.
 
-b. The best way to do this is copy/paste code from "wanderer_listener" and start to work on logic part - detection of free space on the left, right, in front of a robot. Please feel free to consult yout ideas with demonstrators.
+b. The best way to do this is copy/paste code from "wanderer_listener" and start to work on logic part - detection of free space on the left, right, in front of a robot. Please feel free to consult your ideas with demonstrators. Notice, that message ``sensor_msgs/LaserScan)`` contains an array ``float32[] ranges``, which includes the measurements from scanner ordered by an angle. If the robot's heading is zero angle, first measurements correspondes to -90° (ie. right), last measurement to +90° (ie. left)
 
-c. Again, test your node by printing ``ROSINFO()`` - TODO: it will good to prepare for them some random navigation in the environment that they can test their logic of laser scanner reading. 
+c. Again, test your node by using ``ROSINFO()`` to print left, right (depending if a robot should turn left or right).
+
+d. Run Stage simulator by ``roslaunch barc_launch stage_sim.launch`` and your node to test. You can also run your first node wanderer_pubsliher to have robot moving around. 
 
 d. Now, when former step is working, you should import code from "wanderer_publisher". Please notice, that you cant copy/paste everything, but smarter combination is necessary to respect existing code. 
 
