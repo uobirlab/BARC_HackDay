@@ -115,16 +115,28 @@ h. If your node is working, show it to demonstrator. After this, you can put you
 
 a. Run ``roscore`` 
 
-b. Open another terminal and run ``roslaunch TODO pioneer_simple_teleop.launch``, this will enable you a robot hardware and sensors. 
+b. Open another terminal and run ``roslaunch barc_launch pioneer_simple_teleop.launch ``, this will enable you robot's hardware and sensors. 
 
 c. You can open rviz in other terminal by ``rosrun rviz rviz`` 
 
-d. Add a new data to visualise - choose "scan" and as topic choose TODO 
+d. Add a new data to visualise - choose "LaserScan" and as topic choose ``\scan`` 
 
 e. You can run your code by ``rosrun wanderer wanderer_node``. If anything wrong happens, press stop button on joystick.
 
-TODO: they might need to setup extra rights for USB port to be able to connect to robot. Add here the command to do that. TODO: test dependencies for nodes TODO: information about setting .bashrc file
+TODO: they might need to setup extra rights for USB port to be able to connect to robot. Add here the command to do that. TODO: test dependencies for nodes
 
-***Advance navigation:***
+2.Task - advance navigation
+==================================
 
-via ROS move_base package - TODO: description 
+For navigation and obstacle avoidance, ROS’s navigation stack can be used and more specifically the ***move_base*** node. This node reads the odometry, the current pose estimate (through a TF map->odom transformation, and the laser range finder scans from the relevant topics and safely drives the robot in the environment to a predefined goal. Makes use of two different types of maps: a) a global map of the environment that mostly contains stable features (e.g. walls); b) a local map that contains things like walls and obstacles in the local surroundings of the robot. These maps are cost maps. This means that the map is represented by a grid of cells and each cell has a cost value allocated to it. For example a group of greed cells that represents an obstacle will have high cost as these cells are occupied (not free space) and the robot cannot move there. You can find more on these on the [navigation tutorials]. The *pioneer_nav.launch* file contains everything that you need in order to run autonomous navigation on the real robot.
+
+***Simultaneous Localisation and Mapping (SLAM)***
+
+SLAM means that the robot builds on real time a map of the environment tha it is in, while at the same time localises (finds its possition) on this map/environment. The are two main SLAM algoriths in ROS. We will be using [gmapping]. Gmapping needs the input from a laser range finder (normally on the ROS topic "/scan") and odometry (ros [odometry] standard message, normally in "/odom") from the pioneer drivers. It provides a grid map of the environment ("/map" topic) and the pose of the robot through a TF package transformation. To visualise in RVIZ you can choose the map display (on map frame) and the transformation on the for the position of the robot (odometry frame).
+
+
+[navigation tutorials]:http://wiki.ros.org/navigation
+
+[gmapping]:http://wiki.ros.org/gmapping
+
+[odometry]:http://docs.ros.org/hydro/api/nav_msgs/html/msg/Odometry.html
