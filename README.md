@@ -13,9 +13,10 @@ Pre-knowledge:
 -------------
 1. Read and make ROS beginners tutorials: ``http://wiki.ros.org/ROS/Tutorials``
 
-2. RVIZ is a visualisation tool of the robot, its sensoric measurements and values on different topics. When your roscore is running, you can simply open rviz by running ``rosrun rviz rviz``. This will open a Graphical User Interface. On the left, there is a panel with list of chosen parameters to show. You can simply add one by clicking on add button and choose your desire one. Important is, that you need to run some node providing messages to the topic, which you would like to visualise. For example, if you would like to see data fro laser scanner by choosing "scan" in Rviz, you need some node reading data from Hokuyo (laser scanner on the robot) already running.
+2. RVIZ is a visualisation tool, which displays a robot, its sensoric measurements and even values on different topics. When your roscore is running, you can simply open rviz by running ``rosrun rviz rviz``. This will open a Graphical User Interface. On the left, there is a panel with list of chosen parameters to show. You can simply add one by clicking on add button and choose your desire one. 
+It is important, that you need to run a node publishing to a topic, which you would like to visualise. For example, if you would like to see data from laser scanner, you need to click on button "Add", then choose "LaserScan" in Rviz. When clicking on "Topic", you can choose specific topic with data. However, if there is no topic to choose, you dont have any node publishing these data. It means, you are not connected to a robot or simulation.
 
-3. Player/Stage -TODO: some short description
+3. Player/Stage are former tools how to provide standard way for using robotics platforms. The idea behind Player is similar to idea behind ROS - to have standard way of working with a robot and easy switching between working with a real platform or a simulator - Stage. As these were popular tools, ROS also provides a bridge between ROS and Stage simulator. Therefore, Stage simulator can be used without issues when working with ROS, it listen to messages on topics and according them control a robot. It also publish simulation of sensoric measurements. We will use Stage simulator to test our code. 
 
 4. Laser scanner functionality - TODO
 
