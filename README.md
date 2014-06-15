@@ -51,7 +51,7 @@ About the provided launch files:
 1.Task -Simple navigation:
 -----------
 
-This task is for complete beginners. The aim is to write a simple node controlling and moving a robot around using laser scan readings. First, your node will be tested using Stage simulator and as soon as it will work, you will run it on a real Pioneer robot.
+This task is for complete beginners. The aim is to write a simple node controlling and moving a robot around using laser scan readings. First, your node will be tested using ***Stage simulator*** and as soon as it will work, you will run it on a real Pioneer robot.
 
 ***cmd_vel publisher:***
 
@@ -59,7 +59,7 @@ a. Create a new ROS package "wanderer"(see ROS tutorials how to do this).
 
 b. Create a new node "wanderer_publisher" using your favourite programming language.
 
-c. You can control a Pioneer robot by publishing messages of type ``geometry_msgs/Twist`` to topic ***cmd_vel*** (http://wiki.ros.org/ROSARIA). Therefore, create a simple publisher to this topic. You can send command of your preferences. Please note, that a maximal translation speed is 1.2 m/s and maximal rotation speed is 300°/s. 
+c. You can control a Pioneer robot by publishing messages of type ``geometry_msgs/Twist`` (http://docs.ros.org/api/geometry_msgs/html/msg/Twist.html) to topic ***cmd_vel*** (http://wiki.ros.org/ROSARIA). Therefore, create a simple publisher to this topic. You can send command of your preferences. Please note, that a maximal translation speed is 1.2 m/s and maximal rotation speed is 300°/s. 
 
 d. If you are using C++ to code, you need to compile your work by command ``catkin_make`` in your catkin workspace (not inside the package).
 
