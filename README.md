@@ -18,7 +18,7 @@ It is important, that you need to run a node publishing to a topic, which you wo
 
 3. Player/Stage are former tools how to provide standard way for using robotics platforms. The idea behind Player is similar to idea behind ROS - to have standard way of working with a robot and easy switching between working with a real platform or a simulator - Stage. As these were popular tools, ROS also provides a bridge between ROS and Stage simulator. Therefore, Stage simulator can be used without issues when working with ROS, it listen to messages on topics and according them control a robot. It also publish simulation of sensoric measurements. We will use Stage simulator to test our code. 
 
-4. Laser scanner functionality - Laser scan sends a laser beam via some angle and measure a time when reflected beam returned. Then, it counts the distance to an object, where the beam reflected. Afterwards, it increases the angle and sends a new beam to a new position. Therefore, the laser scanner provides set of distances and angles.
+4. Laser scanner functionality - Laser scan works as follows. First, it sends a laser beam in a direction specified by a starting angle. Second, it measures a time between transmitting of the beam and returning of the reflected beam. Then, it counts the distance to an object, where the beam reflected. Afterwards, it increases the angle and sends a new beam to a new position. Therefore, the laser scanner provides set of distances according predefined set of angles.
 
 
 About the Provided code
@@ -42,19 +42,27 @@ About the provided launch files:
 Tasks:
 ------
 
+***Setting up***
+1. Go to your src folder inside catkin workspace and clone the repository by command ``git clone ``
+2. 
+
 ***Simple navigation:*** 
 
-This task is for complete beginners. The aim is to write a simple node controlling and moving a robot around using laser scan readings. First, your node will be tested using Player/Stage simulator and as soon as it will work, you will run it on a real robot.
+This task is for complete beginners. The aim is to write a simple node controlling and moving a robot around using laser scan readings. First, your node will be tested using Stage simulator and as soon as it will work, you will run it on a real Pioneer robot.
 
 ***cmd_vel publisher:***
 
-a. Create a new ROS package "wanderer"(see tutorials how to do this).
+a. Create a new ROS package "wanderer"(see ROS tutorials how to do this).
 
-b. Create a new node "wanderer_publisher" using your favourite programming language. c. You can control a Pioneer robot by publishing messages of type ``TODO`` (link TODO). Therefore, create a simple publisher to this topic. You can send command of your preferences. Please note, that a maximal values are: TODO
+b. Create a new node "wanderer_publisher" using your favourite programming language.
 
-d. If you are using C++ to code, you need to compile your work by command ``catkin_make`` in your catkin workspace (not in package). e. To test your node, first start roscore by command ``roscore``.
+c. You can control a Pioneer robot by publishing messages of type ``geometry_msgs/Twist`` to topic ***cmd_vel*** (http://wiki.ros.org/ROSARIA). Therefore, create a simple publisher to this topic. You can send command of your preferences. Please note, that a maximal translation speed is 1.2 m/s and maximal rotation speed is 300°/s. 
 
-f. In another terminal, run Player/Stage simulator by comand ``TODO``. A window with simulation should open. g. In another terminal, run your code by ``rosrun wanderer wanderer_publisher``. You should see that the robot in simulation starts to move and its behaviour corresponds to the command what you gave to it. h. If you can control a robot, it is time to procede to next step.
+d. If you are using C++ to code, you need to compile your work by command ``catkin_make`` in your catkin workspace (not inside the package).
+
+e. To test your node, first start roscore by command ``roscore``.
+
+f. In a new terminal, run Stage simulator by comand ``roslaunch ``. A window with simulation should open. g. In another terminal, run your code by ``rosrun wanderer wanderer_publisher``. You should see that the robot in simulation starts to move and its behaviour corresponds to the command what you gave to it. h. If you can control a robot, it is time to procede to next step.
 
  ***Laser scanner listener:***
 
