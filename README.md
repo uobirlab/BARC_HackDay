@@ -101,11 +101,15 @@ c. Again, test your node by using ``ROSINFO()`` to print left, right (depending 
 
 d. Run Stage simulator by ``roslaunch barc_launch stage_sim.launch`` and your node to test. You can also run your first node wanderer_pubsliher to have robot moving around. 
 
-d. Now, when former step is working, you should import code from "wanderer_publisher". Please notice, that you cant copy/paste everything, but smarter combination is necessary to respect existing code. 
+e. Now, when previous step is working, you should import code from "wanderer_publisher". Please notice, that you cant copy/paste everything, but smarter combination is necessary to respect existing code. 
 
-e. Send different velocity commands, if a robot is on the left/right. TODO: should they stop robot if there is an obstacle in front of? f. Test your node by running Player/Stage and your node. 
+e. Send different velocity commands, if a robot is on the left/right. You can make experiments with different commands if the robot is really close to an obstacle, or if it is further. 
 
-g. If your node is working, show it to demonstrator. After this, you can put your laptop on the robot and test the same node on real robot!
+f. Test this behaviour by running Stage simulator and your node. 
+
+g. If it is working, add stopping the robot, when an obstacle is directly in fron of it in certain distance. Test again.
+
+h. If your node is working, show it to demonstrator. After this, you can put your laptop on the robot and test the same node on real robot!
 
 ***Real robot testing:***
 
