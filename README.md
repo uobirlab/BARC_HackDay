@@ -18,7 +18,7 @@ It is important, that you need to run a node publishing to a topic, which you wo
 
 3. Player/Stage are former tools how to provide standard way for using robotics platforms. The idea behind Player is similar to idea behind ROS - to have standard way of working with a robot and easy switching between working with a real platform or a simulator - Stage. As these were popular tools, ROS also provides a bridge between ROS and Stage simulator. Therefore, Stage simulator can be used without issues when working with ROS, it listen to messages on topics and according them control a robot. It also publish simulation of sensoric measurements. We will use Stage simulator to test our code. 
 
-4. Laser scanner functionality - TODO
+4. Laser scanner functionality - Laser scan sends a laser beam via some angle and measure a time when reflected beam returned. Then, it counts the distance to an object, where the beam reflected. Afterwards, it increases the angle and sends a new beam to a new position. Therefore, the laser scanner provides set of distances and angles.
 
 
 About the Provided code
