@@ -39,14 +39,17 @@ About the provided launch files:
 - ***stage_sim.launch*** enables all the capabilities from simple teleoperation to SLAM and navigation but on a simulated robot on the stage simulator.
 
 
-Tasks:
+0.Task - Setting up
 ------
 
-***Setting up***
-1. Go to your src folder inside catkin workspace and clone the repository by command ``git clone ``
-2. 
+0. If you dont have catkin workspace, create one. Ensure, that in your ".bashrc" file (use command ```gedit ~/.bashrc``` to open the file) are following lines: ```source /opt/ros/hydro/setup.bash``` and ```source /home/lenka/barc_ws/devel/setup.bash``` (of course, this path differs and must include your actual path to your catkin workspace)
+1. Go to your src folder inside catkin workspace and clone the repository by command ``git clone https://github.com/uobirlab/BARC_HackDay.git
+``
+2. Go to the catkin workspace by command ``cd ..`` and compile the code by running ``catkin_make``, this should run without issues and compile provided code.
 
-***Simple navigation:*** 
+
+1.Task -Simple navigation:
+-----------
 
 This task is for complete beginners. The aim is to write a simple node controlling and moving a robot around using laser scan readings. First, your node will be tested using Stage simulator and as soon as it will work, you will run it on a real Pioneer robot.
 
