@@ -47,7 +47,15 @@ About the provided launch files:
 ``
 2. Go to the catkin workspace by command ``cd ..`` and compile the code by running ``catkin_make``, this should run without issues and compile provided code.
 
-3. Installing ***RosAria***: Rosaria is the driver for the pioneer. You can find detailed instructions in [here]. To sum up the steps, you need to clone rosaria from the git repository inside your workspace, install the dependancies (rosaria library via rosdep), compile the package.
+3. ***Setup joystick:*** Since we will use joystick to teleoparate the robot we need to install the drivers and give ros access to the joystick port. You can find the instraction for [joystick drivers here]. First install the joystick ros drivers by ```sudo apt-get install ros-hydro-joystick-drivers```. Then you can test where the joystick is connected by ```sudo jstest /dev/input/jsX```. Where X is the number of joystick. Normally is connected to js0 or js1. You should be able to see the input of the joystick if you identify the port correctly. When you know where the joystick is connected you need to give permition to the port by ```sudo chmod a+rw /dev/input/jsX```. Run joystick drivers and obverse the joystick topic if everything worked out. 
+
+```
+roscore
+rosparam set joy_node/dev "/dev/input/jsX"
+rosrun joy joy_node
+```
+
+4. Installing ***RosAria***: Rosaria is the driver for the pioneer. You can find detailed instructions in [here]. To sum up the steps, you need to clone rosaria from the git repository inside your workspace, install the dependancies (rosaria library via rosdep), compile the package.
 
 
 ```
@@ -133,6 +141,8 @@ d. Add a new data to visualise - choose "LaserScan" and as topic choose ``\scan`
 
 e. You can run your code by ``rosrun wanderer wanderer_node``. If anything wrong happens, press stop button on joystick.
 
+f. There is a chance that the robot drivers will not have access to the USB port.  In order to enable access you need to ``chmod a+rw /dev/ttyUSB0``
+
 TODO: they might need to setup extra rights for USB port to be able to connect to robot. Add here the command to do that. TODO: test dependencies for nodes
 
 2.Task - advance navigation
@@ -152,3 +162,5 @@ SLAM means that the robot builds on real time a map of the environment tha it is
 [odometry]:http://docs.ros.org/hydro/api/nav_msgs/html/msg/Odometry.html
 
 [here]:http://wiki.ros.org/ROSARIA/Tutorials/How%20to%20use%20ROSARIA
+
+[joystick drivers here]:http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick
