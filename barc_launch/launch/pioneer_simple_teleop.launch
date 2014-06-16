@@ -21,6 +21,13 @@
  <remap from="/teleop/cmd_vel" to="/cmd_vel" />
 </node>
 
+  <!-- hokuyo laser scaner drivers -->
+  <node name="hokuyo" pkg="hokuyo_node" type="hokuyo_node" respawn="false" output="screen">
+    <param name="frame_id" type="string" value="base_laser"/>
+    <param name="calibrate_time" type="bool" value="true"/> <!-- Starts up slow, but accurate timestamps  --> 
+    <param name="port" type="string" value="/dev/ttyACM0"/> <!-- Set the port to connect to here -->
+    <param name="intensity" type="bool" value="false"/>
+  </node>
 
  
 
