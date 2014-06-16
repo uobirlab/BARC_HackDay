@@ -47,6 +47,16 @@ About the provided launch files:
 ``
 2. Go to the catkin workspace by command ``cd ..`` and compile the code by running ``catkin_make``, this should run without issues and compile provided code.
 
+3. Installing ***RosAria***: Rosaria is the driver for the pioneer. You can find detailed instructions in [here]. To sum up the steps, you need to clone rosaria from the git repository inside your workspace, install the dependancies (rosaria library via rosdep), compile the package.
+
+
+```
+cd ~/catkin_ws/src
+git clone https://github.com/amor-ros-pkg/rosaria.git
+rosdep update
+rosdep install rosaria
+catkin_make
+```
 
 1.Task -Simple navigation:
 -----------
@@ -140,3 +150,5 @@ SLAM means that the robot builds on real time a map of the environment tha it is
 [gmapping]:http://wiki.ros.org/gmapping
 
 [odometry]:http://docs.ros.org/hydro/api/nav_msgs/html/msg/Odometry.html
+
+[here]:http://wiki.ros.org/ROSARIA/Tutorials/How%20to%20use%20ROSARIA
