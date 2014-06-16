@@ -51,7 +51,7 @@ About the provided launch files:
 
 
 ```
-cd ~/catkin_ws/src
+cd ~/barc_ws/src
 git clone https://github.com/amor-ros-pkg/rosaria.git
 rosdep update
 rosdep install rosaria
